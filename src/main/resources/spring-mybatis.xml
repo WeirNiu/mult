@@ -31,9 +31,9 @@
         <!-- 注入数据库连接池 -->
         <property name="dataSource" ref="dataSource"/>
         <!-- 扫描model包 使用别名 -->
-        <property name="typeAliasesPackage" value="com.chatRobot.model"/>
+        <property name="typeAliasesPackage" value="com.mult.model"/>
         <!-- 扫描sql配置文件:mapper需要的xml文件 -->
-        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="mapperLocations" value="classpath:../../main/com/mult/mapper/*.xml"/>
     </bean>
 
     <!-- 配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->
@@ -41,7 +41,7 @@
         <!-- 注入sqlSessionFactory -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <!-- 给出需要扫描Dao接口包 -->
-        <property name="basePackage" value="com.chatRobot.dao"/>
+        <property name="basePackage" value="com.mult.dao"/>
     </bean>
 
     <!-- 配置事务管理器 -->
