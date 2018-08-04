@@ -17,6 +17,7 @@
     <!-- mybatis版本号 -->
     <mybatis.version>3.4.2</mybatis.version>
     <jackson.version>3.4.1</jackson.version>
+    <mysql.version>5.1.44</mysql.version>
   </properties>
 
   <dependencies>
@@ -53,7 +54,7 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.41</version>
+      <version>${mysql.version}</version>
       <scope>runtime</scope>
     </dependency>
 
@@ -154,6 +155,13 @@
                     </goals>
                 </execution>
             </executions>
+          <dependencies>
+            <dependency>
+              <groupId>mysql</groupId>
+              <artifactId>mysql-connector-java</artifactId>
+              <version>${mysql.version}</version>
+            </dependency>
+          </dependencies>
         </plugin>
     </plugins>
   </build>

@@ -5,9 +5,6 @@
 <generatorConfiguration>
     <!--导入属性配置 -->
     <properties resource="jdbc.properties"></properties>
-
-    <classPathEntry location="${jdbc.driverLocation}"/>
-
     <context id="context" targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressAllComments" value="false"/>
@@ -22,23 +19,23 @@
         </javaTypeResolver>
 
         <!-- 实体类生成的位置 -->
-        <javaModelGenerator targetPackage="mult.model" targetProject="src/main/com">
+        <javaModelGenerator targetPackage="com.mult.model" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- *Mapper.xml 文件的位置 -->
-        <sqlMapGenerator targetPackage="mult.mapper" targetProject="src/main/com">
+        <sqlMapGenerator targetPackage="com.mult.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
         <!-- Mapper 接口文件的位置 -->
-        <javaClientGenerator targetPackage="mult.dao" targetProject="src/main/com" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.mult.dao" targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
         <!-- 相关表的配置 -->
-        <table tableName="mult" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+        <table tableName="test" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
     </context>
 </generatorConfiguration>

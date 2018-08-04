@@ -1,4 +1,4 @@
-package mult.service;
+package com.mult.service;
 
 public interface IUserService {
 }

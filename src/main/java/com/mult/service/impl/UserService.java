@@ -1,6 +1,6 @@
-package mult.service.impl;
+package com.mult.service.impl;
 
-import mult.service.IUserService;
+import com.mult.service.IUserService;
 import org.springframework.stereotype.Service;
 
 @Service
