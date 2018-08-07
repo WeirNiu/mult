@@ -18,6 +18,7 @@
     <mybatis.version>3.4.2</mybatis.version>
     <jackson.version>3.4.1</jackson.version>
     <mysql.version>5.1.44</mysql.version>
+    <tomcat.maven.plugin.version>2.2</tomcat.maven.plugin.version>
   </properties>
 
   <dependencies>
@@ -127,15 +128,17 @@
   <build>
     <finalName>mult</finalName>
     <plugins>
-      <!--<plugin>-->
-        <!--<groupId>com.mult</groupId>-->
-        <!--<artifactId>mult</artifactId>-->
-        <!--<configuration>-->
-          <!--&lt;!&ndash; 设置JDK版本 &ndash;&gt;-->
-          <!--<source>1.8</source>-->
-          <!--<target>1.8</target>-->
-        <!--</configuration>-->
-      <!--</plugin>-->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>tomcat-maven-plugin</artifactId>
+        <version>${tomcat.maven.plugin.version}</version>
+        <configuration>
+          <uriEncoding>UTF-8</uriEncoding>
+          <port>8080</port>
+          <mode>context</mode>
+          <contextFile>src/main/webapp/WEB-INF/context.xml</contextFile>
+        </configuration>
+      </plugin>
         <!--mybatis-generator插件-->
         <plugin>
             <groupId>org.mybatis.generator</groupId>
