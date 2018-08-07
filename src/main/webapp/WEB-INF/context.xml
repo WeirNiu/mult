@@ -27,15 +27,16 @@
     <!--
     <Manager pathname="" />
     -->
-    <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver"
+    <properties resource="jdbc.properties"></properties>
+    <Resource auth="Container" driverClassName="${jdbc.driver}"
               logAbandoned="true" maxActive="20" maxIdle="10" maxWait="1000"
               removeAbandoned="true"
               removeAbandonedTimeout="60"
-              username="root"
+              username="${jdbc.userName}"
               name="mult"
-              password="123456"
+              password="${jdbc.password}"
               type="javax.sql.DataSource"
-              url="jdbc:mysql://127.0.0.1:3306/mult?generateSimpleParameterMetadata=true&amp;characterEncoding=utf8&amp;autoReconnect=true"
+              url="${jdbc.url}"
               useUnicode="true">
     </Resource>
 </Context>
