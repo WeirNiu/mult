@@ -9,7 +9,9 @@ import redis.clients.jedis.JedisPoolConfig;
 
 
 /**
- *
+ * redis工具类
+ * @author AlexWalker
+ * @date 2018/8/9 10:36
  */
 public class RedisUtil {
     private static Logger logger = LogManager.getLogger(RedisUtil.class);
@@ -23,7 +25,7 @@ public class RedisUtil {
      */
     public static JedisPool getPool() {
         if (pool == null) {
-            // jedispool为null则初始化，
+            // jedisPool为null则初始化，
             JedisPoolConfig config = new JedisPoolConfig();
             // 控制一个pool可分配多少个jedis实例，通过pool.getResource()来获取；
 
@@ -49,14 +51,14 @@ public class RedisUtil {
     /**
      * 获取数据
      *
-     * @param key
-     * @return
+     * @param key 标识
+     * @return value
      */
 
     public static String get(String key) {
         String value = null;
         JedisPool pool = null;
-        Jedis jedis = null;
+        Jedis jedis;
         try {
             pool = getPool();
             jedis = pool.getResource();
@@ -64,12 +66,16 @@ public class RedisUtil {
         } catch (Exception e) {
             // TODO: handle exception
             // 释放redis对象
-            pool.returnBrokenResource(jedis);
-            logger.error("jedis error is" + "e.printStackTrace()");
+            if (pool != null) {
+                pool.close();
+            }
+            logger.error("jedis error is" + e.getMessage());
             logger.error("fail to get data from jedis ", e);
         } finally {
             // 返还到连接池
-            pool.returnResource(jedis);
+            if (pool != null) {
+                pool.close();
+            }
         }
         return value;
 
@@ -78,49 +84,56 @@ public class RedisUtil {
     /**
      * 给key赋值，并生命周期设置为seconds
      *
-     * @param key
-     * @param seconds
-     *            生命周期 秒为单位
-     * @param value
+     * @param key 标识
+     * @param seconds 生命周期 秒为单位
+     * @param value 要赋给key的值
      */
     public static void setx(String key, int seconds, String value) {
         JedisPool pool = null;
-        Jedis jedis = null;
+        Jedis jedis;
         try {
             pool = getPool();
             jedis = pool.getResource();
             jedis.setex(key, seconds, value);
         } catch (Exception e) {
             // 释放redis对象
-            pool.returnBrokenResource(jedis);
+            if (pool != null) {
+                pool.close();
+            }
             logger.error("fail to set key and seconds", e);
         } finally {
             // 返还到连接池
-            pool.returnResource(jedis);
+            if (pool != null) {
+                pool.close();
+            }
         }
     }
     /**
      * 根据key值来删除已经存在的key-value;
      *
-     * @param key
-     * @return
+     * @param key 标识
+     * @return 删除是否成功 返回删除成功数据条数
      */
 
     public static int removex(String key) {
         int temp = 0;
         JedisPool pool = null;
-        Jedis jedis = null;
+        Jedis jedis;
         try {
             pool = getPool();
             jedis = pool.getResource();
             temp = jedis.del(key).intValue();
         } catch (Exception e) {
             // TODO: handle exception
-            pool.returnBrokenResource(jedis);
+            if (pool != null) {
+                pool.close();
+            }
             logger.error("fail to delete the key-value according to the key", e);
         } finally {
             //返回redis实例
-            pool.returnResource(jedis);
+            if (pool != null) {
+                pool.close();
+            }
         }
         return temp;
     }
