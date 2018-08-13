@@ -134,7 +134,12 @@
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
+        <!-- flyway -->
+        <dependency>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-core</artifactId>
+        <version>4.2.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -177,6 +182,42 @@
                         <version>${mysql.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <!--数据库版本maven执行插件-->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>4.2.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>jdbc:mysql://localhost:3306/mult?useUnicode=true&amp;characterEncoding=utf8</url>
+                    <user>root</user>
+                    <password>12345678</password>
+
+                    <!-- 设置接受flyway进行版本管理的数据库，多个数据库以逗号分隔 -->
+                    <!-- <schemas>mult</schemas> -->
+                    <baselineOnMigrate>true</baselineOnMigrate>
+                    <!-- 设置存放flyway metadata数据的表名 -->
+                    <table>schema_version</table>
+                    <!-- 设置flyway扫描sql升级脚本、java升级脚本的目录路径或包路径 -->
+                    <locations>
+                        <location>db</location>
+                        <location>com.mult.basic.init</location>
+                    </locations>
+                    <!-- 设置sql脚本文件的编码 -->
+                    <encoding>UTF-8</encoding>
+                    <!-- 设置执行migrate操作之前的validation行为 -->
+                    <validationMode>ALL</validationMode>
+                    <!-- 设置当validation失败时的系统行为 -->
+                    <validationErrorMode>FAIL</validationErrorMode>
+                </configuration>
             </plugin>
         </plugins>
     </build>
