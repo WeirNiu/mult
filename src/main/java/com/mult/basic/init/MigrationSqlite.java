@@ -1,9 +1,8 @@
 package com.mult.basic.init;
 
-import javax.persistence.ValidationMode;
-import javax.sql.DataSource;
-
 import org.flywaydb.core.Flyway;
+
+import javax.sql.DataSource;
 
 /**
  * @author Weirdo
@@ -17,6 +16,9 @@ public class MigrationSqlite {
         this.dataSource = dataSource;
     }
 
+    /**
+     * 数据库结构迁移入口
+     */
     public void migrate() {
         //初始化flyway类
         Flyway flyway = new Flyway();

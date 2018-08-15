@@ -41,8 +41,8 @@ public class RedisUtil {
             // 在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的；
             config.setTestOnBorrow(true);
 
-            pool = new JedisPool(config, "localhost", 20001, 10000, "123456");
             //10000是protocol.timeout 默认值2000
+            pool = new JedisPool(config, "localhost", 20001, 10000, "123456");
         }
 
         return pool;
