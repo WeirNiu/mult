@@ -17,9 +17,9 @@ import java.util.Properties;
 public class MigrationSqlite {
 
     @Value("#{jdbc}")
-    Properties jdbc;
+    private Properties jdbc;
 
-    public DataSource getDataSource(){
+    private DataSource getDataSource(){
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName(jdbc.getProperty("jdbc.driver"));
         ds.setUrl(jdbc.getProperty("jdbc.url"));
@@ -32,7 +32,7 @@ public class MigrationSqlite {
      * 数据库结构迁移入口
      */
     @PostConstruct
-    public void migrate() {
+    private void migrate() {
         //初始化flyway类
         Flyway flyway = new Flyway();
         //设置加载数据库的相关配置信息

@@ -35,7 +35,7 @@
         </javaClientGenerator>
 
         <!-- 相关表的配置 -->
-        <table tableName="seckill" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+        <table tableName="success_killed" enableCountByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true"/>
     </context>
 </generatorConfiguration>
