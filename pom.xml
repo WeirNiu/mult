@@ -23,6 +23,27 @@
     </properties>
 
     <dependencies>
+
+        <!-- 校验框架-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.5.Final</version>
+        </dependency>
+        <dependency>
+            <!-- 从名字就可以看出来，这个依赖是关于EL表达式的。
+                具体到这里，这个依赖就是为了做消息提示中的表达式计算的。
+                比如，国际化消息提示中的 org.hibernate.validator.constraints.Length.message=length must be between {min} and {max}-->
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.1-b08</version>
+        </dependency>
+        <!-- @Slf4j注解 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.0</version>
+        </dependency>
         <!-- 实现slf4j接口并整合 -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -146,9 +167,9 @@
         </dependency>
         <!-- flyway -->
         <dependency>
-        <groupId>org.flywaydb</groupId>
-        <artifactId>flyway-core</artifactId>
-        <version>4.2.0</version>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>4.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -244,10 +265,10 @@
                     </locations>
                     <!-- 设置sql脚本文件的编码 -->
                     <encoding>UTF-8</encoding>
-<!--                    &lt;!&ndash; 设置执行migrate操作之前的validation行为 &ndash;&gt;
-                    <validationMode>ALL</validationMode>
-                    &lt;!&ndash; 设置当validation失败时的系统行为 &ndash;&gt;
-                    <validationErrorMode>FAIL</validationErrorMode>-->
+                    <!--                    &lt;!&ndash; 设置执行migrate操作之前的validation行为 &ndash;&gt;
+                                        <validationMode>ALL</validationMode>
+                                        &lt;!&ndash; 设置当validation失败时的系统行为 &ndash;&gt;
+                                        <validationErrorMode>FAIL</validationErrorMode>-->
                 </configuration>
             </plugin>
         </plugins>

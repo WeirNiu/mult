@@ -1,19 +1,20 @@
 package com.mult;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Slf4j
 public class Slf4JTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(Slf4JTest.class);
     public static void main(String[] args) {
-        logger.info("Current Time: {}", System.currentTimeMillis());
-        logger.info("Current Time: " + System.currentTimeMillis());
-        logger.info("Current Time: {}", System.currentTimeMillis());
-        logger.trace("trace log");
-        logger.warn("warn log");
-        logger.debug("debug log");
-        logger.info("info log");
-        logger.error("error log");
+        log.info("Current Time: {}", System.currentTimeMillis());
+        log.info("Current Time: " + System.currentTimeMillis());
+        log.info("Current Time: {}", System.currentTimeMillis());
+        log.trace("trace log");
+        log.warn("warn log");
+        log.debug("debug log");
+        log.info("info log");
+        log.error("error log");
     }
 }
