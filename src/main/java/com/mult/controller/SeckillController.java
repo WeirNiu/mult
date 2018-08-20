@@ -2,6 +2,7 @@ package com.mult.controller;
 
 import com.mult.basic.Result;
 import com.mult.service.ISeckillService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,20 +20,20 @@ import javax.annotation.Resource;
  */
 @Controller
 @RequestMapping("order")
+@Slf4j
 public class SeckillController {
-    private final static Logger logger = LoggerFactory.getLogger(SeckillController.class);
     @Resource(name = "SeckillService")
     private ISeckillService seckillService;
 
-    @RequestMapping("createOrder/{sid}")
+    @RequestMapping("createSeckillOrder/{sid}")
     @ResponseBody
     public Result createWrongOrder(@PathVariable Integer sid) {
-        logger.info("sid=[{}]", sid);
+        log.info("sid=[{}]", sid);
         Result result = new Result();
         try {
             result = seckillService.createKillOrder(sid);
         } catch (Exception e) {
-            logger.error("Exception",e);
+            log.error("Exception",e);
         }
         return result;
     }

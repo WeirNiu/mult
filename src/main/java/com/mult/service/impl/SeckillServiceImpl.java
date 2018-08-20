@@ -6,6 +6,7 @@ import com.mult.dao.SeckillMapper;
 import com.mult.model.Seckill;
 import com.mult.model.SeckillExample;
 import com.mult.service.ISeckillService;
+import lombok.Synchronized;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Transaction;
 import sun.rmi.runtime.Log;
 
+import javax.transaction.Synchronization;
 import java.util.Date;
 import java.util.List;
 
@@ -32,13 +34,13 @@ public class SeckillServiceImpl implements ISeckillService {
     final int sku_num = 100; //总库存
     private long starttime; //秒杀开始时间
     private String userid = "admin";  //用户id
-    private static boolean flag = true; //秒杀结束标识
+    boolean flag = true; //秒杀结束标识
 
     @Override
-    public Result createKillOrder(Integer sid) {
+    public synchronized Result createKillOrder(Integer sid) {
         Result result = new Result();
-
-        //todo判断秒杀是否结束根据时间flag
+        //todo
+        //判断秒杀是否结束根据时间flag
         if (flag) {
             Jedis jedis = RedisUtil.getJedis();
             try {
@@ -61,7 +63,7 @@ public class SeckillServiceImpl implements ISeckillService {
                         //抢购成功业务逻辑
                         jedis.sadd("setsucc", userid);
                         //入库持久化
-
+                        //todo
 
                         //成功
                         result.setStat(0);
@@ -72,7 +74,7 @@ public class SeckillServiceImpl implements ISeckillService {
                     }
                 } else {
                     //抢购结束，拒绝后续申请
-                    flag = false;
+                    //todo
                     jedis.sadd("setfail", userid);
                     result.setMsg("手速太慢,已无库存");
                 }

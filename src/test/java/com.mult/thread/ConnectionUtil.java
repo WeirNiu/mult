@@ -5,7 +5,7 @@ import java.net.URLConnection;
 
 public class ConnectionUtil {
     public static void connect() throws Exception {
-		final String urlStr="http://localhost:8080/order/createOrder/1";
+		final String urlStr="http://localhost:8080/order/createSeckillOrder/1";
 		URL url=new URL(urlStr);
 		URLConnection urlConnection = url.openConnection();
 		urlConnection.setDoInput(true);

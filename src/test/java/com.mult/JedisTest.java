@@ -9,8 +9,7 @@ public class JedisTest extends BaseJunit4Test{
     @Test
     public void redisTest(){
         Jedis jedis = RedisUtil.getJedis();
-        jedis.set("test","test");
-        String s  = jedis.get("test");
+        String s  = jedis.get("watchkey");
         System.err.println(s);
     }
 }
