@@ -1,5 +1,6 @@
 package com.mult.basic.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.commons.lang3.StringUtils;
@@ -13,9 +14,9 @@ import redis.clients.jedis.JedisPoolConfig;
  * @author AlexWalker
  * @date 2018/8/9 10:36
  */
+@Slf4j
 public class RedisUtil {
 
-    private static Logger logger = LoggerFactory.getLogger(RedisUtil.class);
     /**Redis服务器IP*/
     private static String HOST= "127.0.0.1,127.0.0.1";
     /**Redis的端口*/
@@ -63,7 +64,7 @@ public class RedisUtil {
                 jedisPool = new JedisPool(config, HOST.split(",")[0], PORT, TIMEOUT);
             }
         } catch (Exception e) {
-            logger.error("First create JedisPool error : " + e);
+            log.error("First create JedisPool error : " + e);
             try {
                 //如果第一个IP异常，则访问第二个IP
                 JedisPoolConfig config = new JedisPoolConfig();
@@ -73,7 +74,7 @@ public class RedisUtil {
                 config.setTestOnBorrow(TEST_ON_BORROW);
                 jedisPool = new JedisPool(config, HOST.split(",")[1], PORT, TIMEOUT, AUTH);
             } catch (Exception e2) {
-                logger.error("Second create JedisPool error : " + e2);
+                log.error("Second create JedisPool error : " + e2);
             }
         }
         return jedisPool.getResource();
@@ -99,7 +100,7 @@ public class RedisUtil {
             value = StringUtils.isEmpty(value) ? "" : value;
             getJedis().set(key, value);
         } catch (Exception e) {
-            logger.error("Set key error : " + e);
+            log.error("Set key error : " + e);
         }
     }
 
@@ -115,7 +116,7 @@ public class RedisUtil {
             value = StringUtils.isEmpty(value) ? "" : value;
             getJedis().setex(key, seconds, value);
         } catch (Exception e) {
-            logger.error("Set keyex error : " + e);
+            log.error("Set keyex error : " + e);
         }
     }
 
